@@ -47,8 +47,6 @@ int main()
 		else break;
 			memset(dp,-1,sizeof dp);
 		//cout<<s<<endl;
-		i=0;
-		int j=n-1;
 		printf("In game %d, the greedy strategy might lose by as many as %lld points.\n",w,2*fun(0,n-1)-s);
 	    w++;
 	}
