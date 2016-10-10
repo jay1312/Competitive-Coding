@@ -1,0 +1,25 @@
+/first go through these two links
+//source https://qph.ec.quoracdn.net/main-qimg-021c751502fb73164f8a6594a34abaa6?convert_to_webp=true
+//source http://www.iarcs.org.in/inoi/online-study-material/topics/dp-tiling.php
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int a[32];
+int main()
+{
+	int n,i;
+	a[0]=1;
+    a[1]=0;
+    a[2]=3;
+    a[3]=0;
+	for(i=4;i<=32;i++)
+	a[i]=4*a[i-2]-a[i-4];
+	while(1)
+	{
+		cin>>n;
+		if(n==-1)
+		break;
+		cout<<a[n]<<endl;
+	}
+}
