@@ -1,0 +1,61 @@
+//first generate answers for first 20 numbers and check the pattern (think bitwise)
+#include<bits/stdc++.h>
+using namespace std;
+//long long int a[1010][1010];
+int main()
+{
+	int t,i,j;
+	long long int n;
+/*	a[0][0]=1;
+	for(i=1;i<=1000;i++)
+	{
+		for(j=0;j<=i;j++)
+		{
+			if(j==0)
+			a[i][j]=1;
+			else
+			a[i][j]=a[i-1][j-1]+a[i-1][j];
+		}
+	}
+	for(i=1;i<=20;i++)
+	{
+	int c=0;
+	for(j=0;j<=i;j++)
+	{
+		if(a[i][j]%2)
+		c++;
+	}
+	cout<<i<<' '<<c<<endl;
+    }
+    */
+    scanf("%d",&t);
+    while(t--)
+    {
+    	scanf("%lld",&n);
+    	int odd=0;// __builtin_popcount(n);
+    	long long int x=n;
+    	while(x)
+    	{
+    		if(x&1)
+    		odd++;
+    		x=x/2;
+    	}
+    	long long int m=1;
+    	while(odd>0)
+    	{
+    		m=m*2;
+    		odd--;
+    	}
+    	//odd=pow(2,odd); overflow
+    	printf("%lld %lld\n",n+1-m,m);
+    }
+    
+}
+
+
+
+
+
+
+
+
