@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool prime[1010];
+vector<int>divi;
+//int gen[100010];
+//int ans[60010];
+//int k=0;
+void sieve() // N is 10^6 so at least one prime factor will be in [1-1000] range ( just think of it )
+{
+	for(int i=3;i*i<=1000;i+=2)
+	{
+	if(!prime[i])
+	{
+//	divi.push_back(i);
+	for(int j=i*i;j<=1000;j+=i)
+	prime[j]=1;
+    }
+    }
+    divi.push_back(2);
+    for(int i=3;i<=1000;i+=2)
+    {
+        if(!prime[i]){
+            divi.push_back(i); // getting all prime numbers in vector for optimisation in line 60 and 73
+        }
+    }
+    //cout<<"k = "<<k<<endl;
+}
+/*void generate() //sieve for having all those numbers to set 1, having only 2 prime factors ( gives TLE :P )
+{
+	memset(gen,0,sizeof gen);
+	for(int i=0;i<k;i++)
+	{
+	for(int j=i+1;j<k;j++)
+	{
+		gen[divi[i]*divi[j]]=1;
+	}
+    }
+}
+*/
+bool check(int n){
+    if(n == 1)
+        return false;
+    for(int i = 2 ; i*i <= n ; i++){
+        if(n%i == 0)
+            return false;
+    }
+    return true;
+}
+int main()
+{
+	sieve();
+	//generate();
+	int p=0;
+	for(int i=1;i<=1000000;i++)
+	{
+			int c;
+			int mul=1;
+			int n=i;
+			int r=0;
+			for(int x=divi[r];r<divi.size()&&x*x<=i;x=divi[++r])
+			{
+		    c=0;
+			while(n%x==0)
+			{
+				n=n/x;
+				c++;
+			}
+			mul=mul*(c+1);
+		    }
+		    if(n!=1)
+		    mul*=2;
+		    r=0;
+		    for(int x=divi[r];r<divi.size() &&x*x<=mul;x=divi[++r])
+            {
+             if(mul%x==0)
+             {
+             	int t=mul/x;
+             	if(x!=t && check(t))
+             	{
+             		p++;
+             		if(p%9==0)
+             		printf("%d\n",i);
+             		break;
+             	}
+             }
+            }
+			/*  if(gen[mul]==1)
+		    {
+		    	cout<<mul<<endl;
+		    	p++;
+		    	if(p%9==0)
+		    	cout<<i<<endl;
+		    }*/
+	}
+//cout<<"p = "<<p<<endl;
+//for(int i=8;i<p;i+=9)
+//	printf("%d\n",ans[i]);
+return 0;
+}
+
+
+
+
