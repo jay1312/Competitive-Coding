@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int arr[100010];
+bool fun(int x,int y)
+{
+	return x==y;
+}
+int main()
+{
+	int n,k,i,c=0;
+	cin>>n>>k;
+	for(i=0;i<n;i++)
+	cin>>arr[i];
+	vector<long long int>a(arr,arr+n);
+	sort(a.begin(),a.end());
+	vector<long long int>::iterator low,high;
+	for(i=0;i<n;i++)
+	{
+	if(binary_search(a.begin(),a.end(),k+a[i],fun))
+	{
+	low=lower_bound(a.begin(),a.end(),k+a[i]);
+	high=upper_bound(a.begin(),a.end(),k+a[i]);
+	int left=low-a.begin();
+	int right=high-a.begin();
+	c=c+right-left;
+	if(i>=left&&i<=right)
+	c--;
+    }
+	}
+	cout<<c;
+}
